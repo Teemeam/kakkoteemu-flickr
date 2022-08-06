@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
-import '../css/App.css';
 
 function App() {
   /* Constant variables */
@@ -24,8 +23,10 @@ function App() {
   }, []);
 
   return (
-    <div className='App'>
-      
+    <div className="min-h-screen flex justify-center items-center">
+      <h1 className="text-3xl font-bold text-blue-600">
+        Install & Setup Vite + React + Typescript + Tailwind CSS 3
+      </h1>
     </div>
   )
 }
