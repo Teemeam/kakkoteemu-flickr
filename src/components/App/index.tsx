@@ -1,18 +1,16 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 
-function App() {
+const App = () => {
   /* Constant variables */
-  const app_key = '5eb244406a33d48b10c1123269a7f5eb';
-  const photoset_id = '72157718780020052';
-  const user_id = '134442412@N06';
-  const url = `https://www.flickr.com/services/rest/?method=flickr.photosets.getPhotos&api_key=${ app_key }&photoset_id=${ photoset_id }&user_id=${ user_id }&format=json&nojsoncallback=1`
+  const photosetUrl = `https://www.flickr.com/services/rest/?method=flickr.photosets.getPhotos&api_key=${ import.meta.env.VITE_APP_KEY }&photoset_id=${ import.meta.env.VITE_PHOTOSET_ID }&user_id=${ import.meta.env.VITE_USER_ID }&format=json&nojsoncallback=1`
 
   /* State variables */
   const [data, setData] = useState(null);
 
+  /* Get data */
   useEffect(() => {
-    const serveRequest = axios.get(url)
+    const serveRequest = axios.get(photosetUrl)
       .then((result) => {
         console.log(result.data);
         setData(result.data);
@@ -24,7 +22,7 @@ function App() {
 
   return (
     <div className="min-h-screen flex justify-center items-center">
-      <h1 className="text-3xl font-bold text-blue-600">
+      <h1 className="text-3xl font-bold text-red-600">
         Install & Setup Vite + React + Typescript + Tailwind CSS 3
       </h1>
     </div>
