@@ -27,7 +27,8 @@ const App = () => {
   /* Get additional info */
   const getInfo = (photosetData: namespace.Data) => {
     const photos = photosetData.photoset.photo;
-    for (let i = 0; i < 10; i += 1) {
+    console.log(photos.length);
+    for (let i = 0; i < photos.length; i += 1) {
       const infoUrl = `https://www.flickr.com/services/rest/?method=flickr.photos.getInfo&api_key=${ credentials.app_key }&photo_id=${ photos[i].id }&format=json&nojsoncallback=1`;
       axios.get(infoUrl)
         .then((result) => {

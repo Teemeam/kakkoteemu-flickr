@@ -32,9 +32,9 @@ const Gallery = ( { data }: namespace.Props) => {
   };
 
   const photos = data;
-  const reversed = photos?.reverse();
+  console.log(photos.length);
+  const reversed = photos?.sort((a, b) => (a.dates!.posted < b.dates!.posted) ? 1 : ((b.dates!.posted < a.dates!.posted) ? -1 : 0));
   const renderedPhotos = reversed?.map((photo, i: number) => {
-    console.log(photo);
     if (i <= renderBuffer) {
       return (
         <span key={ `photo_${ i }` }>
