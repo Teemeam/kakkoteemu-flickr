@@ -32,7 +32,7 @@ const App = () => {
       const infoUrl = `https://www.flickr.com/services/rest/?method=flickr.photos.getInfo&api_key=${ credentials.app_key }&photo_id=${ photos[i].id }&format=json&nojsoncallback=1`;
       axios.get(infoUrl)
         .then((result) => {
-          setData(oldArray => [...oldArray, result.data.photo])
+          setData(oldArray => [...oldArray, result.data.photo]);
         })
         .catch((error) => {
           console.log(error);
