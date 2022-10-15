@@ -18,8 +18,9 @@ interface Photo {
 
 /* Completed data */
 interface CompleteData {
-  height: number,
+  height: number;
   data: Info[];
+  scrollPosition: any;
 }
 
 interface Info {

@@ -1,7 +1,8 @@
 import { SyntheticEvent, useState } from 'react';
-import { LazyLoadImage } from 'react-lazy-load-image-component';
+import { LazyLoadImage, trackWindowScroll } from 'react-lazy-load-image-component';
+import 'react-lazy-load-image-component/src/effects/blur.css';
 
-const Gallery = ( { height, data }: CompleteData) => {
+const Gallery = ( { height, data, scrollPosition }: CompleteData) => {
   const [renderBuffer, setRenderBuffer] = useState<number>(10);
 
   /* Handle error */
@@ -14,7 +15,7 @@ const Gallery = ( { height, data }: CompleteData) => {
     if (i <= renderBuffer) {
       return (
         <div className='h-full first-of-type:ml-10 mr-5' key={ `photo_${ i }` }>
-          <LazyLoadImage className='max-w-none h-full' src={ `https://live.staticflickr.com/${ photo?.server }/${ photo?.id }_${ photo?.originalsecret }_h.jpg` } alt='' onError={ (e) => handleError(e) }/>
+          <LazyLoadImage className='max-w-none h-full' src={ `https://live.staticflickr.com/${ photo?.server }/${ photo?.id }_${ photo?.originalsecret }_b.jpg` } alt='' effect='blur' height='100%' scrollPosition={ scrollPosition } onError={ (e) => handleError(e) }/>
         </div>
       );
     }
@@ -32,4 +33,4 @@ const Gallery = ( { height, data }: CompleteData) => {
   )
 }
 
-export default Gallery;
+export default trackWindowScroll(Gallery);
