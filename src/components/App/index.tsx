@@ -3,6 +3,7 @@ import axios from 'axios';
 import { credentials } from '../../lib/credentials.js';
 
 /* Import dynamically */
+const Header = lazy(() => import('../Header'));
 const Gallery = lazy(() => import('../Gallery'));
 
 const App = () => {
@@ -51,7 +52,8 @@ const App = () => {
   }, []);
 
   return (
-    <div className={ `h-[90vh]` }>
+    <div className='pb-10'>
+      <Header/>
       { data && (
         <Suspense fallback={ <div>Ladataan...</div> }>
           <Gallery height={ height } data={ data }/>
