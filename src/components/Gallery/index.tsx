@@ -1,29 +1,7 @@
 import { SyntheticEvent, useState } from 'react';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 
-declare module namespace {
-  interface Props {
-    data: Data[];
-  }
-  interface Data {
-    id?: string;
-    secret?: string;
-    server?: string;
-    originalsecret?: string;
-    originalformat?: string;
-    description?: Description;
-    dates?: Dates;
-  }
-  interface Description {
-    _content: string;
-  }
-  interface Dates {
-    posted: string;
-    taken: string;
-  }
-}
-
-const Gallery = ( { data }: namespace.Props) => {
+const Gallery = ( { height, data }: CompleteData) => {
   const [renderBuffer, setRenderBuffer] = useState<number>(10);
 
   /* Handle error */
@@ -32,21 +10,19 @@ const Gallery = ( { data }: namespace.Props) => {
   };
 
   const photos = data;
-  console.log(photos.length);
-  const reversed = photos?.sort((a, b) => (a.dates!.posted < b.dates!.posted) ? 1 : ((b.dates!.posted < a.dates!.posted) ? -1 : 0));
-  const renderedPhotos = reversed?.map((photo, i: number) => {
+  const renderedPhotos = photos?.map((photo, i: number) => {
     if (i <= renderBuffer) {
       return (
-        <span key={ `photo_${ i }` }>
-          <LazyLoadImage className='image' src={ `https://live.staticflickr.com/${ photo?.server }/${ photo?.id }_${ photo?.originalsecret }_o.jpg` } alt='' onError={ (e) => handleError(e) }/>
-        </span>
+        <div className='h-full mr-3' key={ `photo_${ i }` }>
+          <LazyLoadImage className='image max-w-none h-full' src={ `https://live.staticflickr.com/${ photo?.server }/${ photo?.id }_${ photo?.originalsecret }_o.jpg` } alt='' onError={ (e) => handleError(e) }/>
+        </div>
       );
     }
   });
 
   return (
-    <div className='outer-image-wrapper'>
-      <div className='inner-gallery-wrapper'>
+    <div className='outer-image-wrapper h-full overflow-x-scroll'>
+      <div className='inner-gallery-wrapper h-full flex flex-row'>
         { renderedPhotos }
       </div>
     </div>

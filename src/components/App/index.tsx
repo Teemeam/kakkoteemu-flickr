@@ -5,39 +5,32 @@ import { credentials } from '../../lib/credentials.js';
 /* Import dynamically */
 const Gallery = lazy(() => import('../Gallery'));
 
-declare module namespace {
-  interface Data {
-    photoset: Photoset;
-  }
-  interface Photoset {
-    id: string;
-    photo: Photo[];
-  }
-  interface Photo {
-    id: string;
-    secret: string;
-    server: string;
-  }
-}
-
 const App = () => {
   /* State variables */
-  const [data, setData] = useState<object[]>([]);
+  const [height, setHeight] = useState<number>(window.innerHeight);
+  const [data, setData] = useState<Info[]>([]);
 
   /* Get additional info */
-  const getInfo = (photosetData: namespace.Data) => {
+  const getInfo = (photosetData: Data) => {
     const photos = photosetData.photoset.photo;
-    console.log(photos.length);
+    let dataArray: Info[] = [];
+    let promises: object[] = [];
     for (let i = 0; i < photos.length; i += 1) {
       const infoUrl = `https://www.flickr.com/services/rest/?method=flickr.photos.getInfo&api_key=${ credentials.app_key }&photo_id=${ photos[i].id }&format=json&nojsoncallback=1`;
-      axios.get(infoUrl)
-        .then((result) => {
-          setData(oldArray => [...oldArray, result.data.photo]);
-        })
-        .catch((error) => {
-          console.log(error);
-        })
+      promises.push(
+        axios.get(infoUrl)
+          .then((result) => {
+            dataArray.push(result.data.photo);
+          })
+          .catch((error) => {
+            console.log(error);
+          })
+      );
     }
+    Promise.all(promises).then(() => {
+      const sortedDataArray = dataArray.sort((a, b) => (a.dates!.posted < b.dates!.posted) ? 1 : ((b.dates!.posted < a.dates!.posted) ? -1 : 0));
+      setData(sortedDataArray);
+    });
   };
 
   /* Get data */
@@ -58,10 +51,10 @@ const App = () => {
   }, []);
 
   return (
-    <div className="min-h-screen flex justify-center items-center">
+    <div className={ `h-[90vh]` }>
       { data && (
         <Suspense fallback={ <div>Ladataan...</div> }>
-          <Gallery data={ data }/>
+          <Gallery height={ height } data={ data }/>
         </Suspense>) }
     </div>
   )
