@@ -2,56 +2,52 @@ import { SyntheticEvent, useState } from 'react';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 
 declare module namespace {
-  export interface Data {
-    data: RootObject[];
+  interface Props {
+    data: Data[];
   }
-  export interface RootObject {
-    photo?: Photo;
+  interface Data {
+    id?: string;
+    secret?: string;
+    server?: string;
+    originalsecret?: string;
+    originalformat?: string;
+    description?: Description;
+    dates?: Dates;
   }
-  export interface Photo {
-    id: string;
-    secret: string;
-    server: string;
-    originalsecret: string;
-    originalformat: string;
-    description: Description;
-    dates: Dates;
-  }
-  export interface Description {
+  interface Description {
     _content: string;
   }
-  export interface Dates {
+  interface Dates {
     posted: string;
     taken: string;
   }
 }
 
-const Gallery = ({ data }: namespace.Data) => {
-  const [renderBuffer, setRenderBuffer] = useState(10);
+const Gallery = ( { data }: namespace.Props) => {
+  const [renderBuffer, setRenderBuffer] = useState<number>(10);
 
   /* Handle error */
   const handleError = (e: SyntheticEvent<HTMLImageElement, Event>) => {
     console.log('Error!');
   };
 
-  /* const photos = data.photoset.photo;
-  const reversed = photos.reverse();
-  const renderedPhotos = reversed.map((photo, i) => {
+  const photos = data;
+  const reversed = photos?.reverse();
+  const renderedPhotos = reversed?.map((photo, i: number) => {
+    console.log(photo);
     if (i <= renderBuffer) {
       return (
         <span key={ `photo_${ i }` }>
-          <LazyLoadImage className='image' src={ photoUrl } alt='' onError={ (e) => handleError(e) }/>
+          <LazyLoadImage className='image' src={ `https://live.staticflickr.com/${ photo?.server }/${ photo?.id }_${ photo?.originalsecret }_o.jpg` } alt='' onError={ (e) => handleError(e) }/>
         </span>
       );
     }
-  }); */
-
-  console.log(data);
+  });
 
   return (
     <div className='outer-image-wrapper'>
       <div className='inner-gallery-wrapper'>
-        Hei
+        { renderedPhotos }
       </div>
     </div>
   )
