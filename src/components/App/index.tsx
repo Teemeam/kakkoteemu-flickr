@@ -5,6 +5,7 @@ import { credentials } from '../../lib/credentials.js';
 /* Import dynamically */
 const Header = lazy(() => import('../Header'));
 const Gallery = lazy(() => import('../Gallery'));
+const Footer = lazy(() => import('../Footer'));
 
 const App = () => {
   /* State variables */
@@ -58,6 +59,7 @@ const App = () => {
         <Suspense fallback={ <div>Ladataan...</div> }>
           <Gallery height={ height } data={ data }/>
         </Suspense>) }
+      <Footer/>
     </div>
   )
 }
