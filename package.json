@@ -5,7 +5,8 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc && vite build --base=https://kakkoteemu.fi/film/",
+    "build-dev": "tsc && vite build",
+    "build-prod": "tsc && vite build --base=https://kakkoteemu.fi/film/",
     "preview": "vite preview"
   },
   "dependencies": {

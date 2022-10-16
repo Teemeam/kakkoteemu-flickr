@@ -18,6 +18,10 @@ Install dependencies.
 
 Run project.
 
-### **npm run build**
+### **npm run build-dev**
 
 Build project.
+
+### **npm run build-prod**
+
+Build project to production.
