@@ -8,7 +8,6 @@ const Gallery = lazy(() => import('../Gallery'));
 const Footer = lazy(() => import('../Footer'));
 
 const App = () => {
-  /* State variables */
   const [height, setHeight] = useState<number>(window.innerHeight);
   const [data, setData] = useState<Info[]>([]);
 
