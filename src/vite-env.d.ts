@@ -20,7 +20,11 @@ interface Photo {
 interface CompleteData {
   height: number;
   data: Info[];
-  scrollPosition: any;
+}
+
+interface InfoWrapper {
+  photo: Info;
+  i: number;
 }
 
 interface Info {
