@@ -35,6 +35,7 @@ interface Info {
   originalformat?: string;
   description?: Description;
   dates?: Dates;
+  urls?: Urls;
 }
 
 interface Description {
@@ -44,4 +45,13 @@ interface Description {
 interface Dates {
   posted: string;
   taken: string;
+}
+
+interface Urls {
+  url: Url[];
+}
+
+interface Url {
+  type: string;
+  _content: string;
 }
