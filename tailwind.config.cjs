@@ -9,6 +9,12 @@ module.exports = {
       fontFamily: {
         'montserrat': ['"Montserrat"', 'sans-serif'],
       },
+      minHeight: {
+        '100px': '100px',
+      },
+      minWidth: {
+        '200px': '200px',
+      },
     },
   },
   plugins: [
