@@ -10,7 +10,7 @@ const Gallery = ( { height, data }: CompleteData) => {
   const renderedPhotos = photos?.map((photo, i: number) => {
     if (i <= renderBuffer) {
       return (
-        <GalleryImage photo={ photo } i={ i }/>
+        <GalleryImage key={ `gallery-image_${ i }` } photo={ photo } i={ i }/>
       );
     }
   });

@@ -1,9 +1,9 @@
 import { tags } from '../../lib/tags.js';
 
 const Header = () => {
-  const options = tags.map((tag) => {
+  const options = tags.map((tag, i) => {
     return (
-      <option className='font-montserrat font-light text-sm' value={ tag.value }>{ tag.label }</option>
+      <option key={ `option_${ i }` } className='font-montserrat font-light text-sm' value={ tag.value }>{ tag.label }</option>
     );
   });
 
