@@ -10,6 +10,8 @@ const Footer = lazy(() => import('../Footer'));
 const App = () => {
   const [height, setHeight] = useState<number>(window.innerHeight);
   const [data, setData] = useState<Info[]>([]);
+  const [selected, setSelected] = useState<string[]>([]);
+  const [filteredData, setFilteredData] = useState<Info[]>([]);
 
   /* Get additional info */
   const getInfo = (photosetData: Data) => {
