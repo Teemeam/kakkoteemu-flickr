@@ -51,9 +51,14 @@ const App = () => {
     getData();
   }, []);
 
+  /* Handle select input change */
+  const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    console.log(e.target.value);
+  };
+
   return (
     <div className='pb-10'>
-      <Header/>
+      <Header handleChange={ handleChange }/>
       { data && (
         <Suspense fallback={ <div>Ladataan...</div> }>
           <Gallery height={ height } data={ data }/>
