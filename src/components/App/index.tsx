@@ -13,6 +13,17 @@ const App = () => {
   const [selected, setSelected] = useState<string[]>([]);
   const [filteredData, setFilteredData] = useState<Info[]>([]);
 
+  /* Filter data according to selected */
+  const filterData = (selected: string[]) => {
+    const filtered = data.filter((photo) => photo.tags?.tag.find((tag) => selected.includes(tag._content)));
+    setFilteredData(filtered);
+  };
+
+  /* If selected change */
+  useEffect(() => {
+    filterData(selected);
+  }, [selected]);
+
   /* Get additional info */
   const getInfo = (photosetData: Data) => {
     const photos = photosetData.photoset.photo;
@@ -33,6 +44,7 @@ const App = () => {
     Promise.all(promises).then(() => {
       const sortedDataArray = dataArray.sort((a, b) => (a.dates!.posted < b.dates!.posted) ? 1 : ((b.dates!.posted < a.dates!.posted) ? -1 : 0));
       setData(sortedDataArray);
+      setFilteredData(sortedDataArray);
     });
   };
 
@@ -55,7 +67,14 @@ const App = () => {
 
   /* Handle select input change */
   const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    console.log(e.target.value);
+    const options = e.target.options;
+    const values: string[] = [];
+    for (let i = 0; i < options.length; i += 1) {
+      if (options[i].selected) {
+        values.push(options[i].value);
+      }
+    }
+    setSelected(values);
   };
 
   return (
@@ -63,7 +82,7 @@ const App = () => {
       <Header handleChange={ handleChange }/>
       { data && (
         <Suspense fallback={ <div>Ladataan...</div> }>
-          <Gallery height={ height } data={ data }/>
+          <Gallery height={ height } data={ filteredData }/>
         </Suspense>) }
       <Footer/>
     </div>

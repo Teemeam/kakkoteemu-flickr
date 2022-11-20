@@ -36,6 +36,7 @@ interface Info {
   description?: Description;
   dates?: Dates;
   urls?: Urls;
+  tags?: Tags;
 }
 
 interface Description {
@@ -53,5 +54,13 @@ interface Urls {
 
 interface Url {
   type: string;
+  _content: string;
+}
+
+interface Tags {
+  tag: Tag[];
+}
+
+interface Tag {
   _content: string;
 }
