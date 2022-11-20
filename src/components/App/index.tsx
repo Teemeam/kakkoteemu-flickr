@@ -15,7 +15,12 @@ const App = () => {
 
   /* Filter data according to selected */
   const filterData = (selected: string[]) => {
-    const filtered = data.filter((photo) => photo.tags?.tag.find((tag) => selected.includes(tag._content)));
+    let filtered = data;
+    let filterStage: Info[] = [];
+    for (let i = 0; i < selected.length; i += 1) {
+      filterStage = filtered.filter((photo) => photo.tags?.tag.find((tag) => tag._content === selected[i]));
+      filtered = filterStage;
+    }
     setFilteredData(filtered);
   };
 
