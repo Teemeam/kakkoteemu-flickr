@@ -1,4 +1,4 @@
-# **Film Photo Showcase** ![Shutter icon](/public/favicon-32x32.png){ style="margin: auto" }
+# **Film Photo Showcase** ![AI generated shutter icon](/public/favicon-16x16.png)
 
 Fetch photos from the Flickr API.
 
