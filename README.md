@@ -1,4 +1,11 @@
-# **Film Photo Showcase** ![AI generated shutter icon](/public/favicon-16x16.png)
+# **Film Photo Showcase**
+
+<img
+  alt="Shutter icon"
+  align="right"
+  src="https://kakkoteemu.fi/film/android-chrome-192x192.png"
+  width="60px"
+/>
 
 Fetch photos from the Flickr API.
 
