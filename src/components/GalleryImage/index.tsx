@@ -5,7 +5,7 @@ import 'react-lazy-load-image-component/src/effects/blur.css';
 /* Flickr icon */
 import flickrIcon from '../../assets/flickr-icon-80px.png';
 
-const GalleryImage = ({ photo, i }: InfoWrapper) => {
+const GalleryImage = ({ photo, i, handleImageLoaded }: InfoWrapper ) => {
   const [formattedDescription, setFormattedDescription] = useState<any>([]); // Type needs attention 
   const [showDescription, setShowDescription] = useState(false);
   const [descOpacity, setDescOpacity] = useState(false);
@@ -44,11 +44,12 @@ const GalleryImage = ({ photo, i }: InfoWrapper) => {
 
   return (
     <div className='relative sm:h-full h-auto sm:w-auto w-full sm:first-of-type:ml-10 sm:mr-5 mr-0 sm:mb-0 mb-3 cursor-pointer' key={ `photo_${ i }` } onClick={ () => setShowDescription(!showDescription) } onMouseLeave={ () => setShowDescription(false) }>
-      <LazyLoadImage className='max-w-none sm:h-full h-auto sm:w-auto w-full' src={ `https://live.staticflickr.com/${ photo?.server }/${ photo?.id }_${ photo?.originalsecret }_h.jpg` } alt='' effect='blur' height='100%' onError={ (e) => handleError(e) }/>
+      <LazyLoadImage className='max-w-none sm:h-full h-auto sm:w-auto w-full' src={ `https://live.staticflickr.com/${ photo?.server }/${ photo?.id }_${ photo?.originalsecret }_h.jpg` } alt='' effect='blur' height='100%' afterLoad={ () => handleImageLoaded() } onError={ (e) => handleError(e) }/>
       <div className={ 'absolute top-0 right-0 bottom-0 left-0 transition-opacity bg-black/[.8] ' + (descOpacity ? 'opacity-100' : 'opacity-0') + (descVisibility ? ' visible' : ' invisible') }>
         <div className='absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-11/12'>
           { formattedDescription }
         </div>
+
         {/* Link to Flickr */}
         <div className='absolute top-3 right-3 w-8 h-8 transition-transform hover:scale-125'>
           <a className='w-full' href={ photo?.urls?.url[0]._content } target='_blank' rel='noopener noreferrer'>

@@ -84,12 +84,21 @@ const App = () => {
 
   return (
     <div className='pb-10'>
-      <Header handleChange={ handleChange }/>
+      {/* Header */}
+      <Suspense fallback={ <div/> }>
+        <Header handleChange={ handleChange }/>
+      </Suspense>
+
+      {/* Gallery */}
       { data && (
-        <Suspense fallback={ <div>Ladataan...</div> }>
+        <Suspense fallback={ <div/> }>
           <Gallery height={ height } data={ filteredData }/>
         </Suspense>) }
-      <Footer/>
+
+      {/* Footer */}
+      <Suspense fallback={ <div/> }>
+        <Footer/>
+      </Suspense>
     </div>
   )
 }

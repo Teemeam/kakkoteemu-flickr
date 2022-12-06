@@ -25,6 +25,7 @@ interface CompleteData {
 interface InfoWrapper {
   photo: Info;
   i: number;
+  handleImageLoaded: Function;
 }
 
 interface Info {
